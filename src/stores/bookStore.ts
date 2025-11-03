@@ -18,6 +18,8 @@ export const useBookStore = defineStore('book',
             setInitialData(books: Book[]) {
                 this.data = books
             }
+
+            
         },
         getters: {
             getBooks(): Book[] {
