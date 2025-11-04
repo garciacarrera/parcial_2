@@ -17,7 +17,7 @@ const cart= reactive(cartStore)
         <h3 class="text-lg font-semibold mt-3">{{ book.title }}</h3>
         <p class="text-sm text-gray-600">por {{ book.author }}</p>
         <p class="mt-2 text-emerald-700 font-medium">${{ book.price }}</p>
-        <button @click="cart.addBookInCart(book)" class="btn-buy">Comprar</button>
+        <button class="mt-3 w-full bg-emerald-600 text-white py-2 rounded-lg hover:bg-emerald-700 transition"  @click="cart.addBookInCart(book)" >Comprar</button>
 
     </div>
 </template>

@@ -5,8 +5,8 @@ interface BookInCartState {
     isLoading: boolean,
     data: BookInCart[],
     error: string | null,
-    totalPrice: number,
-    totalBooks: number,
+    precioTotal: number,
+    TotalLibros: number,
 }
 
 export const useBookInCartStore = defineStore('bookInCart',
@@ -15,50 +15,52 @@ export const useBookInCartStore = defineStore('bookInCart',
             isLoading: false,
             data: [],
             error: null,
-            totalPrice: 0,
-            totalBooks: 0
+            precioTotal: 0,
+            TotalLibros: 0
         }),
         actions: {
             setInitialData(books: BookInCart[]) {
                 this.data = books
             },
             addBookInCart(book: Book) {
-                const bookExistInCart = this.data.find(b => b.id === book.id )
-                if(bookExistInCart){
-                    bookExistInCart.qty++
-                    this.totalBooks++
+                const CarritoLibro = this.data.find(b => b.id === book.id )
+                if(CarritoLibro){
+                    CarritoLibro.qty++
+                    this.TotalLibros++
+                    
                 }else{
                     this.data.push({...book, qty: 1})
-                    this.totalBooks++
+                    this.TotalLibros++
                 }
 
-                this.totalPrice += book.price
+                this.precioTotal += book.price
             },
             removeBookInCart(book: Book): void {
-                const bookExistInCart = this.data.find(b => b.id === book.id)
+                const CarritoLibro = this.data.find(b => b.id === book.id)
 
-                if(!bookExistInCart) return;
+                if(!CarritoLibro) return;
 
-                if(bookExistInCart.qty>=1){
-                    bookExistInCart.qty--
-                    if(bookExistInCart.qty===0){
+                if(CarritoLibro.qty>=1){
+                    CarritoLibro.qty--
+                    if(CarritoLibro.qty===0){
                         this.data = this.data.filter(b => b.id !== book.id)
                     }
-                    this.totalBooks--
+                    this.TotalLibros--
                 }
 
-                this.totalPrice -= book.price
+                this.precioTotal -= book.price
             }
         },
         getters: {
             getBooks(): BookInCart[] {
                 return this.data
             },
-            getTotalPrice(): number {
-                return this.totalPrice
+            getprecioTotal(): number {
+                return this.precioTotal
             },
             getTotalBooks(): number {
-                return this.totalBooks
+                return this.TotalLibros
+                
             }
         }
     }

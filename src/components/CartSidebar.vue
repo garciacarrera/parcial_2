@@ -9,7 +9,7 @@ const emit = defineEmits(['close'])
 const store = useBookInCartStore()
 
 const booksInCart = computed(() => store.getBooks)
-const totalPrice = computed(() => store.getTotalPrice)
+const totalPrice = computed(() => store.getprecioTotal)
 const totalOfBooks = computed(() => store.getTotalBooks)
 </script>
 
